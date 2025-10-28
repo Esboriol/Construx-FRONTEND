@@ -1,10 +1,9 @@
 <script setup lang="ts">
-
 import NavHeader from "@/Header/nav-header.vue";
 </script>
 
 <template>
-  <header>
+  <header class="header">
     <div class="div-img">
       <img src="/public/favicon.ico" alt="Logo Empresa Construx"/>
     </div>
@@ -20,19 +19,15 @@ import NavHeader from "@/Header/nav-header.vue";
 </template>
 
 <style scoped>
-  header {
-    background-color: orange;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+header {
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
 
-  img {
-    margin-left: 20px;
-  }
-
-  .div-img, .div-nav {
-    flex: 1;
-  }
-
+.div-img, .div-nav {
+  flex: 1;
+}
 </style>

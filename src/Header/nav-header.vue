@@ -17,7 +17,6 @@
     flex-direction: row;
     justify-content: flex-end;
     gap: 1rem;
-    margin-right: 20px;
   }
 
   router-link {
