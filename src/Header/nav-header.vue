@@ -4,10 +4,10 @@
 
 <template>
   <nav>
-    <router-link to="/">Inicio</router-link>
-    <router-link to="/">Inicio</router-link>
-    <router-link to="/">Inicio</router-link>
-    <router-link to="/">Inicio</router-link>
+    <router-link to="/" class="nav-btn">Inicio</router-link>
+    <router-link to="/" class="nav-btn">Inicio</router-link>
+    <router-link to="/" class="nav-btn">Inicio</router-link>
+    <router-link to="/" class="nav-btn">Inicio</router-link>
   </nav>
 </template>
 
@@ -19,7 +19,7 @@
     gap: 1rem;
   }
 
-  router-link {
+  .nav-btn {
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
