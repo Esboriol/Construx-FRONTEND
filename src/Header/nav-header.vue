@@ -4,7 +4,7 @@
 
 <template>
   <nav>
-    <router-link to="/" class="nav-btn">Inicio</router-link>
+    <router-link to="/login" class="nav-btn">Login</router-link>
     <router-link to="/" class="nav-btn">Inicio</router-link>
     <router-link to="/" class="nav-btn">Inicio</router-link>
     <router-link to="/" class="nav-btn">Inicio</router-link>
