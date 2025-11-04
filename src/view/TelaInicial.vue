@@ -46,14 +46,17 @@ export default {
       <aside class="promo-cards">
         <div class="card">
           <h4>Frete grátis</h4>
+          <img src="https://placehold.co/80x80" alt="">
           <p>Acima de R$ 299</p>
         </div>
         <div class="card">
           <h4>Parcelamento</h4>
+          <img src="https://placehold.co/80x80" alt="">
           <p>Em até 6x sem juros</p>
         </div>
         <div class="card">
           <h4>Suporte técnico</h4>
+          <img src="https://placehold.co/80x80" alt="">
           <p>Assistência para escolha de produtos</p>
         </div>
       </aside>
@@ -62,10 +65,10 @@ export default {
     <section class="categories">
       <h2>Categorias Rápidas</h2>
       <div class="cats-grid">
-        <a class="cat" href="#"><img src="https://placehold.co/30x30" alt=""><span>Ferramentas</span></a>
-        <a class="cat" href="#"><img src="https://placehold.co/30x30" alt=""><span>Materiais</span></a>
-        <a class="cat" href="#"><img src="https://placehold.co/30x30" alt=""><span>Tintas</span></a>
-        <a class="cat" href="#"><img src="https://placehold.co/30x30" alt=""><span>Segurança</span></a>
+        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Ferramentas</span></a>
+        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Materiais</span></a>
+        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Tintas</span></a>
+        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Segurança</span></a>
       </div>
     </section>
 
@@ -234,7 +237,12 @@ main {
   padding: 16px;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  text-align: center
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 16px;
 }
 
 .card h4 {
@@ -245,6 +253,13 @@ main {
 .card p {
   margin: 0;
   color: var(--muted)
+}
+
+.card img {
+  width: min-content;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto
 }
 
 /* CATEGORIES */
