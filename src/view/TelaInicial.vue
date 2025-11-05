@@ -4,21 +4,27 @@ import axios from "axios";
 export default {
   data() {
     return {
-      mensagem: null
+      listProdutos: null,
+      listCategorias: null
     };
   },
   mounted() {
-    axios.get('http://127.0.0.1:5000/api')
+    axios.get('https://backend-construx.onrender.com/api/produtos')
         .then(response => {
-          this.mensagem = response.data.message;
+          this.listProdutos = response.data;
         })
         .catch(error => {
           console.error('Erro ao buscar dados:', error);
         });
-  }
+    axios.get('https://backend-construx.onrender.com/api/categorias')
+        .then(response =>{
+          this.listCategorias = response.data;
+        })
+        .catch(error => {
+          console.error('Erro ao encontrar bagulho foda', error);
+        })
+   }
 };
-
-
 </script>
 
 <template>
@@ -65,76 +71,26 @@ export default {
     <section class="categories">
       <h2>Categorias Rápidas</h2>
       <div class="cats-grid">
-        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Ferramentas</span></a>
-        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Materiais</span></a>
-        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Tintas</span></a>
-        <a class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>Segurança</span></a>
+        <a v-for="categoria in listCategorias" class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>{{ categoria.nome_categoria }}</span></a>
       </div>
     </section>
 
     <section class="featured">
       <h2>Produtos em Destaque</h2>
       <div class="products-grid" id="productsGrid">
-        <article class="product" data-name="Furadeira Profissional">
+        <article v-for="produto in listProdutos" :key="produto.id" class="product" data-name="Furadeira Profissional">
           <div class="thumb">
-            <img src="https://placehold.co/200x140" alt="Furadeira Profissional">
-            <span class="tag sale">-20%</span>
+            <img :src=produto.url_imagem alt="Furadeira Profissional">
           </div>
-          <h3 class="prod-title">Furadeira Profissional 800W</h3>
+          <h3 class="prod-title">{{produto.nome}}</h3>
           <div class="price">
-            <span class="old">R$ 379,90</span>
-            <strong>R$ 303,92</strong>
+            <strong> R$ {{ produto.preco_unitario }}</strong>
           </div>
           <div class="prod-actions">
             <button class="btn-secondary" data-sku="DRL-800">Ver</button>
             <button class="btn-primary add-cart" data-sku="DRL-800">Adicionar</button>
           </div>
         </article>
-
-        <article class="product" data-name="Cimento CP II 50kg">
-          <div class="thumb">
-            <img src="https://placehold.co/200x140" alt="Cimento CP II 50kg">
-          </div>
-          <h3 class="prod-title">Cimento CP II 50kg</h3>
-          <div class="price">
-            <strong>R$ 39,90</strong>
-          </div>
-          <div class="prod-actions">
-            <button class="btn-secondary">Ver</button>
-            <button class="btn-primary add-cart" data-sku="CIM-50">Adicionar</button>
-          </div>
-        </article>
-
-        <article class="product" data-name="Tinta Acrílica 18L">
-          <div class="thumb">
-            <img src="https://placehold.co/200x140" alt="Tinta Acrílica 18L">
-            <span class="tag top">Mais vendido</span>
-          </div>
-          <h3 class="prod-title">Tinta Acrílica 18L Branco Neve</h3>
-          <div class="price">
-            <strong>R$ 149,90</strong>
-          </div>
-          <div class="prod-actions">
-            <button class="btn-secondary">Ver</button>
-            <button class="btn-primary add-cart" data-sku="TIN-18">Adicionar</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="deal">
-      <h2>Oferta Relâmpago</h2>
-      <div class="deal-card">
-        <img src="https://placehold.co/160x110" alt="Serra elétrica">
-        <div class="deal-info">
-          <h3>Serra Elétrica 2000W</h3>
-          <p class="countdown" id="dealCountdown">00:15:00</p>
-          <div class="price">
-            <strong>R$ 499,00</strong>
-            <span class="old">R$ 699,00</span>
-          </div>
-          <button class="btn-primary add-cart" data-sku="SR-2000">Comprar Agora</button>
-        </div>
       </div>
     </section>
   </main>
