@@ -1,4 +1,41 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import axios from "axios";
+
+const email = ref("");
+const senha = ref("");
+const loading = ref(false);
+const error = ref("");
+const router = useRouter();
+const route = useRoute();
+
+async function onSubmit() {
+  loading.value = true;
+  error.value = "";
+
+  try {
+    const response = await axios.post("https://backend-construx.onrender.com/api/login", {
+      email: email.value,
+      senha: senha.value,
+    });
+    console.log(response.data)
+    if (response.data.sucesso) {
+      // Salva o token e o nome do usuário
+      //localStorage.setItem("accessToken", response.data.accessToken);
+      //localStorage.setItem("nomeUsuario", response.data.nome);
+
+      router.push("/");
+    } else {
+      error.value = "Falha no login";
+    }
+  } catch (err) {
+    error.value = "Erro ao conectar ao servidor";
+  } finally {
+    loading.value = false;
+  }
+}
+</script>
 
 <template>
     <div class="um">
@@ -6,17 +43,18 @@
       <div class="dois card shadow-sm">
         <div class="tres">
           <h2 class="h2">Login</h2>
-          <form class="form">
+          <form @submit.prevent="onSubmit" class="form">
             <div class="cinco">
-              <input type="email" placeholder="user@email.com" required />
+              <input type="email" v-model="email" placeholder="user@email.com" required />
             </div>
             <div>
               <label>Senha</label>
-              <input type="password" placeholder="********" required />
+              <input type="password" v-model="senha" placeholder="********" required />
             </div>
             <div class="quatro">
-              <button type="submit">Entrar</button>
-              <button type="reset">Limpar</button>
+              <button :class="['btn btn-block', !loading ? 'btn-accent': 'btn-neutral text-gray-200',]" :disabled="loading">
+                {{ loading ? "Entrando..." : "Entrar" }}
+              </button>
             </div>
           </form>
         </div>
