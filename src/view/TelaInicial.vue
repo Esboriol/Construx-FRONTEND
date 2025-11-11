@@ -1,4 +1,5 @@
 <script>
+import router from "@/router";
 import axios from "axios";
 
 export default {
@@ -7,6 +8,15 @@ export default {
       listProdutos: null,
       listCategorias: null
     };
+  },
+  methods: {
+    IrParaProduto(id_pro) {
+      router.push( {name: 'produto', query: {id:id_pro}})
+    },
+
+    IrParaCategoriaTops(id_ca) {
+      router.push({ name: 'categorias', query: {id_categoria:id_ca}})
+    }
   },
   mounted() {
     axios.get('https://backend-construx.onrender.com/api/produtos')
@@ -69,11 +79,19 @@ export default {
     </section>
 
     <section class="categories">
-      <h2>Categorias Rápidas</h2>
-      <div class="cats-grid">
-        <a v-for="categoria in listCategorias" class="cat" href="#"><img src="https://placehold.co/36x36" alt=""><span>{{ categoria.nome_categoria }}</span></a>
-      </div>
-    </section>
+    <h2>Categorias Rápidas</h2>
+    <div class="cats-grid">
+      <button 
+        v-for="categoria in listCategorias" 
+        :key="categoria.id" 
+        class="cat" 
+        @click="IrParaCategoriaTops(categoria.id_categoria)"
+      >
+        <img :src=categoria.url_imagem alt="">
+        <span>{{ categoria.nome_categoria }}</span>
+      </button>
+    </div>
+  </section>
 
     <section class="featured">
       <h2>Produtos em Destaque</h2>
@@ -87,7 +105,7 @@ export default {
             <strong> R$ {{ produto.preco_unitario }}</strong>
           </div>
           <div class="prod-actions">
-            <button class="btn-secondary" data-sku="DRL-800">Ver</button>
+            <button @click="IrParaProduto(produto.id)" class="btn-secondary" data-sku="DRL-800">Ver</button>
             <button class="btn-primary add-cart" data-sku="DRL-800">Adicionar</button>
           </div>
         </article>
