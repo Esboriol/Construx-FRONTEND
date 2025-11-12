@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import router from '@/router';
 const query = ref('');
 const emit = defineEmits(['search']);
 
 function submit(e: Event) {
   e.preventDefault();
-  emit('search', query.value.trim());
+  router.push ({name: 'busca', query: {busca_nome:query.value.trim()}})
 }
 </script>
 
